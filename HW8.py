@@ -58,15 +58,20 @@ def barchart_restaurant_categories(db_filename):
     for restaurant in restaurant_tuples:
         restaurant_dict[restaurant[0]] = restaurant[1]
 
-    sorted_categories = dict(sorted(restaurant_categories.items(), key=lambda x: x[1]))
+    sorted_categories = dict(sorted(restaurant_dict.items(), key=lambda x: x[1]))
+
+    key_list = list(sorted_categories.keys())
+    value_list = list(sorted_categories.values())
     
-    plt.barh((list(sorted_categories.keys())), (list(sorted_categories.values())))
+    
+    plt.barh(key_list, value_list)
     plt.title("Types of Restuarants per Category on South University")
     plt.ylabel("Restaurant Category")
     plt.xlabel("Number of Restaurants")
     plt.show()
 
-    return restaurant_categories
+    return restaurant_dict
+
 
 #EXTRA CREDIT
 def highest_rated_category(db_filename):#Do this through DB as well
