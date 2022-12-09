@@ -11,7 +11,6 @@ def get_restaurant_data(db_filename):
     """
     conn = sqlite3.connect(db_filename)
     cur = conn.cursor()
-    
     cur.execute(
         """
         SELECT restaurants.name, categories.category, buildings.building, restaurants.rating FROM restaurants
@@ -42,7 +41,6 @@ def barchart_restaurant_categories(db_filename):
     """
     conn = sqlite3.connect(db_filename)
     cur = conn.cursor()
-    
     cur.execute(
         """
         SELECT category, COUNT (category_id) FROM restaurants
@@ -54,15 +52,12 @@ def barchart_restaurant_categories(db_filename):
     conn.commit()
 
     restaurant_dict = {}
-
     for restaurant in restaurant_tuples:
         restaurant_dict[restaurant[0]] = restaurant[1]
-
+    
     sorted_categories = dict(sorted(restaurant_dict.items(), key=lambda x: x[1]))
-
     key_list = list(sorted_categories.keys())
     value_list = list(sorted_categories.values())
-    
     
     plt.barh(key_list, value_list)
     plt.title("Types of Restuarants per Category on South University")
